@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Best parking</title>
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+
+    <div class="header" id="myHeader">
+        <div class="column80" style="background-color:#aaa;">
+            <h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+            <h3 style="margin: auto;">Welcome</h3>
+        </div>
+        <div class="column20" style="background-color:#bbb;">
+            <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
+                <form name="f" th:action="@{/perform-login}" method="post">
+                      <br><label for="email">E-mail</label>
+                      <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                      <p></p><label for="password">Password</label>
+                      <input type="password" id="password" name="password">
+                      <p></p><button type="submit">Sign in</button> or
+                      <a href="registration">Sign UP</a>
+                </form>
+            </div>
+            <div sec:authorize="!hasRole('ROLE_ANONYMOUS')">
+                <div class="wrapper">
+                    <div class="block">
+                        <form style="margin: 15px;" action="/home">
+                            <button type="submit" style="margin-top: 1fr;">Home</button>
+                        </form>
+                    </div>
+                    <div class="block_off">
+                        <form style="margin: 5px;" th:action="@{/logout}" method="post" title="Log out">
+                            <button style="margin-top: 1fr;">
+                                <img width="40" height="40" src="../img/power_off.png" alt="Log OUT">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <th:block th:if="${param.error}">
+            <div style="color: red">Incorrect e-mail or password</div><br>
+        </th:block>
+
+        <h1>We have free places to order</h1><br>
+        <h3>Contacts</h3>
+        <h4>Address : XXXXXX</h4>
+        <h4>Phone   : YYYYYYY</h4>
+        <h4>E-mail  : ads@gav.gav</h4>
+    </div>
+    </div>
+    <script src="../js/scripts.js"></script>
+
+</body>
+</html>
+

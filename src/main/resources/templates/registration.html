@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Best parking</title>
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+    </head>
+
+    <body>
+        <div class="header" id="myHeader">
+            <div class="column80" style="background-color:#aaa;">
+                <h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+                <h3 style="margin: auto;">Hello new friend</h3>
+            </div>
+            <div class="column20" style="text-align: center;background-color:#bbb;">
+                <form style="margin: 20px;" action="/login">
+                    <div style="margin: 20px;">
+                        <button type="submit" style="margin-top: 1fr;">Main page</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="content">
+            <h3>Registration</h3>
+            <th:block th:if="${error}">
+                <div th:text="${error}" style="color: red"></div>
+                <br>
+            </th:block>
+
+            <form name="reg_form" action="/registration" method="post">
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <label for="firstName" style="grid-column: 1; grid-row: 1;">First name </label><br>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="grid-item">
+                        <label for="lastName">Last name </label><br>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <div class="grid-item">
+                        <label for="email">E-mail </label><br>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="grid-item">
+                        <label for="phone">Phone number </label><br>
+                        <input type="tel" id="phone" name="phone" placeholder="+380XXXXXXXXX" required>
+                    </div>
+                    <div class="grid-item">
+                        <label for="password">Password </label><br>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="grid-item">
+                        <label for="passwordConfirm">Confirm</label><br>
+                        <input type="password" id="passwordConfirm" name="passwordConfirm" required>
+                    </div>
+                    <div>
+                        <button type="submit">Register</button>
+                    </div>
+                    <div>
+                        <button type="reset">Clear form</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script src="../js/reg_form.js"></script>
+        <script src="../js/scripts.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Best parking</title>
+		<link rel="shortcut icon" href="../img/parking/favicon.ico" />
+	    <link rel="stylesheet" type="text/css" href="../css/style.css">
+	</head>
+	<body>
+	
+		<div class="header" id="myHeader">
+			<div class="column80" style="background-color:#aaa;">
+				<h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+				<h3 style="margin: auto;">About me</h3>
+			</div>
+			<div class="column20" style="text-align: center;background-color:#bbb;">
+                <div class="wrapper">
+                    <div class="block">
+						<form style="margin: 15px;" action="/home">
+							<button type="submit" style="margin-top: 1fr;">Home</button>
+						</form>
+						<form style="margin: 15px;" action="/user/history">
+							<button type="submit" style="margin-top: 1fr;">History</button>
+						</form>
+						<form style="margin: 15px;" action="/map">
+							<button type="submit" style="margin-top: 1fr;">Parking map</button>
+						</form>
+					</div>
+					<div class="block_off">
+						<form style="margin: 5px;" th:action="@{/logout}" method="post" title="Log out">
+							<button style="margin-top: 1fr;">
+								<img width="40" height="40" src="../img/power_off.png" alt="Log OUT">
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>  
+		</div>
+		
+		<div class="content">
+			<h3>Update information</h3>
+
+			<th:block th:if="${message}">
+				<div th:text="${message}" style="color: red"></div><br>
+			</th:block>
+
+			<form name="reg_form" action="/user/update" method ="post">
+				<div class="grid-container">
+					<div class="grid-item">
+						<label for="firstName" style="grid-column: 1; grid-row: 1;">First name </label><br>
+						<input type="text" style="grid-column: 1; grid-row: 2;"id="firstName" name="firstName" th:placeholder="${firstName}">
+					</div>
+					<div class="grid-item">
+						<label for="lastName">Last name </label><br>
+						<input type="text" id="lastName" name="lastName" th:placeholder="${lastName}">
+					</div>
+					<div class="grid-item">
+						<label for="email">E-mail </label><br>
+						<input type="email" id="email" name="email" th:placeholder="${login}">
+					</div>
+					<div class="grid-item">
+						<label for="phone">Phone number </label><br>
+						<!--pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"-->
+						<input type="tel" id="phone" name="phone" placeholder="+380XXXXXXXXX" th:placeholder="${phone}">
+					</div>
+					<div class="grid-item">
+						<label for="password">Password </label><br>
+						<input type="password" id="password" name="password" >
+					</div>
+					<div class="grid-item">
+						<label for="psw_confirm">Confirm</label><br>
+						<input type="password" id="psw_confirm" name="psw_confirm" >
+					</div>
+				</div>
+                <div>
+					<button type="submit">Update</button>
+                </div>
+			</form>
+		</div>
+		<script src="../js/scripts.js"></script>
+	</body>
+</html>

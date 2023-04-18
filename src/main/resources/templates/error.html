@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Best parking</title>
+        <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/parking.css">
+    </head>
+    <body>
+        <div class="header" id="myHeader">
+            <div class="column80" style="background-color:#aaa; margin: auto ;">
+                <h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+                <h3 style="margin: auto;">Ooops! Something went wrong! </h3>
+            </div>
+
+            <div class="column20" style="text-align: center;background-color:#bbb;">
+                <div class="wrapper">
+                    <div class="block">
+                        <!--form style="margin: 15px;" action="/reservation"-->
+                        <form style="margin: 15px;" action="/home">
+                            <button id="btnReservation" type="submit" style="margin-top: 1fr;">Home</button>
+                        </form>
+                    </div>
+                    <div class="block_off">
+                        <form style="margin: 5px;" th:action="@{/logout}" method="post" title="Log out">
+                            <button style="margin-top: 1fr;">
+                                <img width="40" height="40" src="../img/power_off.png" alt="Log OUT">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1>Failed to process your request</h1>
+            <div>
+                <div>
+                    <span><strong>Status</strong></span>
+                    <span th:text="${status}"></span>
+                </div>
+                <div>
+                    <span><strong>Error</strong></span>
+                    <span th:text="${error}"></span>
+                </div>
+                <div>
+                    <span><strong>Message</strong></span>
+                    <span th:text="${message}"></span>
+                </div>
+                <div th:if="${exception != null}">
+                    <span><strong>Exception</strong></span>
+                    <span th:text="${exception}"></span>
+                </div>
+                <div th:if="${trace != null}">
+                    <span><strong>Stacktrace</strong></span>
+                    <span th:text="${trace}"></span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

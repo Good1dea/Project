@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Best parking</title>
+    <link rel="shortcut icon" href="../img/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/parking.css">
+</head>
+<body>
+<div class="header" id="myHeader">
+    <div class="column80" style="background-color:#aaa; margin: auto ;">
+        <h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+        <h3 style="margin: auto;">Ooops! Something went wrong! </h3>
+    </div>
+
+    <div class="column20" style="text-align: center;background-color:#bbb;">
+        <div class="wrapper">
+            <div class="block">
+                <!--form style="margin: 15px;" action="/reservation"-->
+                <form style="margin: 15px;" action="/home">
+                    <button id="btnReservation" type="submit" style="margin-top: 1fr;">Home</button>
+                </form>
+                <form style="margin: 15px;" action="/map" method="get">
+                    <button type="submit" style="margin-top: 1fr;">Parking map</button>
+                </form>
+                <form style="margin: 15px;" action="/history">
+                    <button type="submit" style="margin-top: 1fr;">History</button>
+                </form>
+            </div>
+            <div class="block_off">
+                <form style="margin: 5px;" th:action="@{/logout}" method="post" title="Log out">
+                    <button style="margin-top: 1fr;">
+                        <img width="40" height="40" src="../img/power_off.png" alt="Log OUT">
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="content">
+        <div style="margin: auto; font-size: 5em; text-color:red">404</div>
+    </div>
+</body>
+</html>
