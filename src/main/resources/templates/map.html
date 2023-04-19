@@ -44,6 +44,9 @@
         </div>
 
         <div class="content">
+            <p th:if="${message}">
+                <div th:text="${message}" style="color: red"></div><br>
+            </p>
             <div class="grid-container-parking">
                 <th:block th:each="place : ${places}">
                     <div name="place" th:id="${place.getId()}" th:onclick="|clickHandler(${place.getId()})|"

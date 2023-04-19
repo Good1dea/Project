@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 
@@ -21,8 +22,6 @@ public class ReservationController {
 
     private final InvoiceService invoiceService;
     private final UserService userService;
-
-
     @Autowired
     public ReservationController(InvoiceService service, UserService userService) {
         this.invoiceService = service;
@@ -40,7 +39,8 @@ public class ReservationController {
     }
 
     @PostMapping("/reservation/invoice")
-    public ModelAndView saveInvoice(@ModelAttribute Invoice invoice, ModelAndView modelAndView) throws MessagingException {
+    public ModelAndView saveInvoice(@ModelAttribute Invoice invoice, ModelAndView modelAndView,
+                                    final RedirectAttributes redirectAttributes) throws MessagingException {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         invoice.setUser(userService.loadUserByUsername(login));
         String message = "This parking place is reserved already, please choose another";
@@ -48,11 +48,12 @@ public class ReservationController {
             message = invoiceService.sendInvoiceToMail(invoice);
             log.info("Create new invoice {} and sent to email {}", invoice.getId(), login);
             modelAndView.addObject("invoice", invoice);
+            modelAndView.addObject("message", message);
             modelAndView.setViewName("invoice");
         } else {
-            modelAndView.setViewName("reservation");
+            redirectAttributes.addFlashAttribute("message", message);
+            modelAndView.setViewName("redirect:/map");
         }
-        modelAndView.addObject("message", message);
         return modelAndView;
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.swing.*;
 import java.util.List;
 
 @Controller
@@ -24,9 +25,10 @@ public class ParkingPlaceController {
     }
 
     @GetMapping("/map")
-    public String getMap (Model model){
+    public String getMap (@ModelAttribute("message")String message, Model model){
         List<ParkingPlace> places = service.getAllParkingPlace();
         model.addAttribute("places", places);
+        model.addAttribute("message", message);
         return "map";
     }
 

@@ -39,12 +39,6 @@
     </div>
 
     <div class="content">
-
-        <p th:if="${message}">
-        <div th:text="${message}" style="color: red"></div>
-        <br>
-        </p>
-
         <h3>You must fill all fields to complete order</h3>
         <th:block>
             <form style="margin: 20px;"  action="/reservation/invoice" method="post">
