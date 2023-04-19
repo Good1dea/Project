@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Best parking</title>
+        <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/parking.css">
+    </head>
+
+    <body>
+        <div class="header" id="myHeader">
+            <div class="column80" style="background-color:#aaa; margin: auto ;">
+                <h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+                <h3 style="margin: auto;">Parking map</h3>
+            </div>
+
+            <div class="column20" style="text-align: center;background-color:#bbb;">
+                <div class="wrapper">
+                    <div class="block">
+                        <form style="margin: 15px;" action="/home">
+                            <button type="submit" style="margin-top: 1fr;">Home</button>
+                        </form>
+                        <form style="margin: 15px;" action="/user/history">
+                            <button type="submit" style="margin-top: 1fr;">History</button>
+                        </form>
+                        <div sec:authorize="!hasRole('ROLE_ADMIN')">
+                            <form style="margin: 15px;" action="/user/update">
+                                <button type="submit" style="margin-top: 1fr;">Update info</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="block_off">
+                        <form style="margin: 5px;" th:action="@{/logout}" method="post" title="Log out">
+                            <button style="margin-top: 1fr;">
+                                <img width="40" height="40" src="../img/power_off.png" alt="Log OUT">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <p th:if="${message}">
+                <div th:text="${message}" style="color: red"></div><br>
+            </p>
+            <div class="grid-container-parking">
+                <th:block th:each="place : ${places}">
+                    <div name="place" th:id="${place.getId()}" th:onclick="|clickHandler(${place.getId()})|"
+                         th:attr="data-reserve=${place.reserved}, data-id=${place.getId()}, data-price=${place.getPricePerDay()}">
+                        <th:block th:text="${place.getId()}"></th:block>
+                        <th:block th:if="${place.reserved == true}">Busy</th:block>
+                        <th:block th:unless="${place.reserved == true}">Free</th:block>
+                    </div>
+                </th:block>
+            </div>
+            <div sec:authorize="!hasRole('ROLE_ADMIN')">
+                <form style="margin: 15px;" id="frm-send" method="post" action="/map">
+                    <label for="id">Parking place:</label>
+                    <input type="text" style="text-align: center" id="id" name="id" maxlength="3" size="3" readonly required/>
+                    <label for="pricePerDay">Price per day:</label>
+                    <input type="text" style="text-align: center" id="pricePerDay" name="pricePerDay" maxlength="8" size="8"
+                           readonly required/>
+                    <input type="hidden" id="invoice" name="invoice" value="null"/>
+                    <input type="hidden" id="reserved" name="reserved" value="true"/>
+                    <br>
+                    <button type="submit" style="margin-top: 1fr;">Reserve a place</button>
+                </form>
+            </div>
+            <!--p>Second floor</p>
+                <div class="grid-container-parking">
+                    <div name="place" id="211" onClick="clickHandler(this.id)">free</div><div name="place" id="212" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="213" onClick="clickHandler(this.id)">free</div><div name="place" id="214" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="215" onClick="clickHandler(this.id)">free</div><div name="place" id="216" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="217" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="221" onClick="clickHandler(this.id)">free</div><div name="place" id="222" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="223" onClick="clickHandler(this.id)">free</div><div name="place" id="224" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="225" onClick="clickHandler(this.id)">free</div><div name="place" id="226" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="227" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="231" onClick="clickHandler(this.id)">free</div><div name="place" id="232" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="233" onClick="clickHandler(this.id)">free</div><div name="place" id="234" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="235" onClick="clickHandler(this.id)">free</div><div name="place" id="236" onClick="clickHandler(this.id)">free</div>
+                    <div name="place" id="237" onClick="clickHandler(this.id)">free</div>
+                </div-->
+        </div>
+        <script src="../js/parking.js"></script>
+        <script src="../js/scripts.js"></script>
+    </body>
+
+</html>

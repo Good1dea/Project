@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Best parking</title>
+    <link rel="shortcut icon" href="../img/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+
+<body>
+
+    <div class="header" id="myHeader">
+        <div class="column80" style="background-color:#aaa;">
+            <h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+        </div>
+
+        <div class="column20" style="background-color:#bbb;">
+            <div class="wrapper">
+                <div class="block">
+                    <form action="/login" method="get">
+
+                        <p></p><button type="submit">Sign in</button> or
+                        <a href="registration">Sign UP</a>
+
+                    </form>
+                </div>
+                <div class="block_off">
+                    <form style="margin: 5px;" th:action="@{/logout}" method="post" title="Log out">
+                        <button style="margin-top: 1fr;">
+                            <img width="40" height="40" src="../img/power_off.png" alt="Log OUT">
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <h1>Invoices</h1>
+
+        <th:block th:if="${messageSend}">
+            <div th:text="${messageSend}" style="color: red"></div><br>
+        </th:block>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Reserved Place Number</th>
+                <th>Reserved Place Price</th>
+                <th>Car Number</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Total Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="invoice : ${page.content}">
+                <td th:text="${invoice.id}"></td>
+                <td th:text="${invoice.date}"></td>
+                <td th:text="${invoice.reservedPlace.id}"></td>
+                <td th:text="${invoice.reservedPlace.pricePerDay}"></td>
+                <td th:text="${invoice.carNumber}"></td>
+                <td th:text="${invoice.startDate}"></td>
+                <td th:text="${invoice.endDate}"></td>
+                <td th:text="${invoice.totalPrice}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div th:if="${page.totalPages > 1}">
+            <ul>
+                <li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+                    <a th:href="@{/admin/user_invoices(email=${email}, page=${i})}" th:text="${i + 1}"></a>
+                </li>
+            </ul>
+        </div>
+
+        <h3>Find invoices by another user email</h3>
+        <form method="get" action="/admin/user_invoices">
+            <label for="email">User email:</label>
+            <input type="text" id="email" name="email" required>
+            <button type="submit">Search</button>
+        </form>
+
+</body>
+</html>

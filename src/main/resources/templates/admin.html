@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Best parking</title>
+        <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+    </head>
+    <body>
+        <div class="header" id="myHeader">
+            <div class="column80" style="background-color:#aaa;">
+                <h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+                <h3 style="margin: auto;">xXXXx ADMIN MENU xXXXx</h3>
+            </div>
+            <div class="column20" style="text-align: center;background-color:#bbb;">
+                <div class="wrapper">
+                    <div class="block">
+                        <form style="margin: 15px;" action="/invoice-list-paging/1">
+                            <button type="submit" style="margin-top: 1fr;">History</button>
+                        </form>
+                        <form style="margin: 15px;" action="/map">
+                            <button type="submit" style="margin-top: 1fr;">Parking map</button>
+                        </form>
+                    </div>
+                    <div class="block_off">
+                        <form style="margin: 5px;" th:action="@{/logout}" method="post" title="Log out">
+                            <button style="margin-top: 1fr;">
+                                <img width="40" height="40" src="../img/power_off.png" alt="Log OUT">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <p th:if="${message}">
+                <div th:text="${message}" style="color: red"></div>
+                <br>
+            </p>
+
+            <h3>Today`s orders</h3>
+            <form method="get" action="/admin/invoices_today">
+                <button type="submit">View</button>
+            </form>
+
+            <h3>Update parking places information</h3>
+            <form action="/admin/map_refresh" method="post">
+                <button type="submit">Clear some places</button>
+            </form>
+
+            <h3>Find all invoices by parking place</h3>
+            <form method="get" action="/admin/invoices">
+                <label for="placeId">Parking place number:</label>
+                <input type="text" size="14"
+                       style="text-align: center; width: 90px;"
+                       id="placeId" name="placeId" required><br>
+                <button type="submit">Find invoices</button>
+            </form>
+
+            <h3>Find all invoices by user email</h3>
+            <form method="get" action="/admin/user_invoices">
+                <label for="email">User email:</label>
+                <input type="text" size="14" id="e_mail" name="email" required><br>
+                <button type="submit">Search</button>
+            </form>
+
+            <h3>Find invoices by car number</h3>
+            <form method="get" action="/admin/invoices_car">
+                <label for="carNumber">Car number:</label>
+                <input type="text" size="14" id="carNumber" name="carNumber" required><br>
+                <button type="submit">Find invoices</button>
+            </form>
+
+            <h3>Send invoice to user email</h3>
+            <form method="get" action="/admin/sendmail">
+                <label for="invoiceId">Invoice ID:</label>
+                <input type="text" size="14"
+                       style="text-align: center; width: 90px;"
+                       id="invoiceId" name="invoiceId" required><br>
+                <button type="submit">Send invoice</button>
+            </form>
+
+            <th:block th:if="${messageSend}">
+                <div th:text="${messageSend}" style="color: red"></div>
+                <br>
+            </th:block>
+
+            <h3>Delete user by email</h3>
+            <form method="post" action="/admin/delete_user">
+                <label for="email">User email:</label>
+                <input type="email" size="14" id="email" name="email" required><br>
+                <button type="submit">Delete</button>
+            </form>
+
+            <h3>Block parking space</h3>
+            <form method="post" action="/admin/block_place">
+                <label for="id">Parking place number:</label>
+                <input type="id" size="14" id="id" name="id" required><br>
+                <button type="submit">Block</button>
+            </form>
+
+            <h3>Unlock parking space</h3>
+            <form method="post" action="/admin/unlock_place">
+                <label for="place_id">Parking place number:</label>
+                <input type="place_id" size="14" id="place_id" name="place_id" required><br>
+                <button type="submit">Unlock</button>
+            </form>
+
+            <h3>Grant user role "Admin"</h3>
+            <form method="post" action="/admin/create_admin">
+                <label for="emailAdmin">User email:</label>
+                <input type="email" size="14" id="emailAdmin" name="emailAdmin" required><br>
+                <button type="submit">Grant role</button>
+            </form>
+        </div>
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>

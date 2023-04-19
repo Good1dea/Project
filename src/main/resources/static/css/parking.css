@@ -1,0 +1,23 @@
+.grid-container-parking {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    gap: 50px;
+    padding: 50px;
+    width: 60%;
+    margin: auto;
+  }
+  
+  .grid-container-parking > div {
+    border: 1px solid black;
+    font-size: 25px;
+    height: 130px;  
+    width: 100px;
+    padding: 20%;
+    background-color: green;
+    margin: auto;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+  

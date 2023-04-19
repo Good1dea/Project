@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Best parking</title>
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+
+<body>
+    <div class="header" id="myHeader">
+        <div class="column80" style="background-color:#aaa; margin: auto ;">
+            <h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+            <h3 style="margin: auto;">Get your place</h3>
+        </div>
+        <div class="column20" style="text-align: center;background-color:#bbb;">
+            <div class="wrapper">
+                <div class="block">
+                    <form style="margin: 15px;" action="/map">
+                        <button type="submit" style="margin-top: 1fr;">Parking map</button>
+                    </form>
+                    <form style="margin: 15px;" action="/user/history">
+                        <button type="submit" style="margin-top: 1fr;">History</button>
+                    </form>
+                    <form style="margin: 15px;" action="/user/update">
+                        <button type="submit" style="margin-top: 1fr;">Update info</button>
+                    </form>
+                </div>
+                <div class="block_off">
+                    <form style="margin: 5px;" th:action="@{/logout}" method="post" title="Log out">
+                        <button style="margin-top: 1fr;" title="Log out">
+                            <img width="40" height="40" src="../img/power_off.png" alt="Log OUT">
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h3>You must fill all fields to complete order</h3>
+        <th:block>
+            <form style="margin: 20px;"  action="/reservation/invoice" method="post">
+                <div style="margin: auto;">
+                    <label for="reservedPlace">Parking place:</label>
+                    <input type="text" placeholder="" style="text-align: center" id="reservedPlace"
+                        name="reservedPlace" maxlength="3" size="3" th:value="${place_id}" readonly required>
+                    <label for="carNumber">Car number:</label>
+                    <input type="text" placeholder="XX 0000 XX" style="text-align: center; width: 90px;" id="carNumber" name="carNumber" required>
+                    <label for="startDate">First date:</label>
+                    <input type="date" id="startDate" name="startDate" required>
+                    <label for="endDate">Last date:</label>
+                    <input type="date" id="endDate" name="endDate" onchange="compare();" required>
+                    <label for="user">E-mail:</label>
+                    <input type="email" maxlength="320" size="12" id="user" name="user" th:value="${login}" readonly required>
+                </div>
+                <div style="margin: 20px;">
+                    <button type="submit" style="padding-top: 1fr;">Confirm reservation</button>
+                </div>
+            </form>
+        </th:block>
+    </div>
+    <script src="../js/calendar_add.js"></script>
+    <script src="../js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Best parking</title>
+        <link rel="shortcut icon" href="../img/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/parking.css">
+    </head>
+    <body>
+        <div class="header" id="myHeader">
+            <div class="column80" style="background-color:#aaa; margin: auto ;">
+                <h2>The Best of the Best of parking place of Zaporizhzhya</h2>
+                <h3 style="margin: auto;">Invoice</h3>
+            </div>
+
+            <div class="column20" style="text-align: center;background-color:#bbb;">
+                <div class="wrapper">
+                    <div class="block">
+                        <form style="margin: 15px;" action="/home">
+                            <button type="submit" style="margin-top: 1fr;">Home</button>
+                        </form>
+                        <form style="margin: 15px;" action="/map" method="get">
+                            <button type="submit" style="margin-top: 1fr;">Parking map</button>
+                        </form>
+                        <form style="margin: 15px;" action="/user/history">
+                            <button type="submit" style="margin-top: 1fr;">History</button>
+                        </form>
+                    </div>
+                    <div class="block_off">
+                        <form style="margin: 5px;" th:action="@{/logout}" method="post" title="Log out">
+                            <button style="margin-top: 1fr;">
+                                <img width="40" height="40" src="../img/power_off.png" alt="Log OUT">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+
+            <th:block th:if="${message}">
+                <div th:text="${message}" style="color: red"></div><br>
+            </th:block>
+
+            <h1>Invoice Details</h1>
+            <br>
+            <table style="margin: auto;" border="2">
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>Reserved Place number</th>
+                    <th>Car Number</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Total Price $</th>
+                </tr>
+                <tr>
+                    <td th:text="${invoice.id}"></td>
+                    <td th:text="${invoice.date}"></td>
+                    <td th:text="${invoice.user.firstName} + ${invoice.user.lastName}"></td>
+                    <td th:text="${invoice.user.email}"></td>
+                    <td th:text="${invoice.reservedPlace.id}"></td>
+                    <td th:text="${invoice.carNumber}"></td>
+                    <td th:text="${invoice.startDate}"></td>
+                    <td th:text="${invoice.endDate}"></td>
+                    <td th:text="${invoice.totalPrice}"></td>
+                </tr>
+            </table>
+        </div>
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
